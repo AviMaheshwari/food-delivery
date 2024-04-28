@@ -1,6 +1,6 @@
 import { AddPhotoAlternate,FormatStrikethrough } from "@mui/icons-material";
 import { Box, Button, Chip, CircularProgress, FormControl, Grid, IconButton, InputLabel, OutlinedInput, Select, TextField, MenuItem } from "@mui/material";
-//import { useFormik } from "formik";
+import { useFormik } from "formik";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { uploadImageToCloudinary } from "../util/UploadToCloudinary";
@@ -19,31 +19,31 @@ const initialValues = {
 
 export const CreateMenuForm = () => {
   const [uploadImage, setUploadImage] = useState(false);
-  /*const formik = useFormik({
+  const formik = useFormik({
     initialValues,
     onSubmit: (values) =>{
         values.restaurantId = 2
         console.log("data---",values)
     },
-  });*/
+  });
   const handleImageChange = async(e) => {
     const file=e.target.files[0]
     setUploadImage(true)
     const image = await uploadImageToCloudinary(file)
     console.log("image ---",image)
-   // Formik.setFieldValue("images",[...Formik.values.images.image])
+    formik.setFieldValue("images",[...formik.values.images.image])
    setUploadImage(false)
   };
   const handleRemoveImage = (index) => {
-    //const updatedImages=[...formik.values.images]
-    updatedImage.splice(index,1);
+    const updatedImages=[...formik.values.images]
+    updatedImages.splice(index,1);
     FormatStrikethrough.setFieldValue("images",updatedImages)
   };
   return (
     <div className="py-10 px-5 lg:flex item-center justify-center min-h-screen">
       <div className="lg:max-w-4xl">
         <h1 className="font-bold text-2x1 text-center py-2">add new Menu</h1>
-        <form /*onSubmit={formik.handleSubmit}*/ className="space-y-4">
+        <form onSubmit={formik.handleSubmit} className="space-y-4">
           <Grid container spacing={2}>
             <Grid className="flex flex-wrap gap-5" item xs={12}>
               <input
@@ -149,7 +149,7 @@ export const CreateMenuForm = () => {
           name="ingredients"
           multiple
           //value={Formik.values.ingredients}
-          onChange={handleChange}
+          // onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Ingredients" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
