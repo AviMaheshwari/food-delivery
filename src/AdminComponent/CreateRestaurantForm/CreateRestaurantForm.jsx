@@ -62,12 +62,12 @@ const CreateRestaurantForm = () => {
     setUploadImage(true)
     const image = await uploadImageToCloudinary(file)
     console.log("image ---",image)
-   Formik.setFieldValue("images",[...formik.values.images.image])
+   formik.setFieldValue("images",[...formik.values.images.image])
    setUploadImage(false)
   };
   const handleRemoveImage = (index) => {
     const updatedImages=[...formik.values.images]
-    updatedImage.splice(index,1);
+    updatedImages.splice(index,1);
     FormatStrikethrough.setFieldValue("images",updatedImages)
   };
   return (

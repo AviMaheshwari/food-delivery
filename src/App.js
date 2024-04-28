@@ -19,11 +19,11 @@ function App() {
 
 useEffect(()=>{
   dispatch(getUser(auth.jwt || jwt ));
-  dispatch(findCart(jwt));
+  // dispatch(findCart(jwt));
 },[auth.jwt]);
 
 useEffect(()=>{
-dispatch(getRestaurantByUserId(auth.jwt || jwt));
+// dispatch(getRestaurantByUserId(auth.jwt || jwt));
 
 },[auth.user])
 
